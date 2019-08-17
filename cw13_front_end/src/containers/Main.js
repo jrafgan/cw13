@@ -48,7 +48,7 @@ class Main extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        return prevProps.recipes !== this.props.recipes;
+        return prevProps.ratings !== this.props.ratings;
     }
 
     render() {
@@ -72,7 +72,6 @@ class Main extends Component {
                                         </Link>
                                     </Typography>
                                 </CardContent>
-                                {this.props.ratings && <ReadOnlyRating data={this.props.ratings.filter(rating => rating.institution._id === institution._id)} />}
                                 {this.props.user && this.props.user.role === "admin" &&
                                 <Button onClick={() => this.props.deleteInstitution(institution._id)}>Delete</Button>}
                             </Card>

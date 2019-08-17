@@ -55,8 +55,7 @@ router.delete('/', [auth, permit('admin')], async (req, res) => {
 
         if (rating) {
             await rating.remove();
-            const ratings = await Rating.find();
-            return res.status(200).send(ratings);
+            return res.status(200).send({message: "Ok"});
         } else {
             return res.status(400).send('Not found !');
         }

@@ -51,7 +51,7 @@ export const deleteRating = id => {
     return dispatch => {
         return axios.delete('/ratings?id=' + id).then(
             response => {
-                dispatch(fetchRatingsSuccess(response.data));
+                dispatch(getRatings());
             });
     };
 };
