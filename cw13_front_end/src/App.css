@@ -1,0 +1,85 @@
+body {
+
+    position: relative;
+}
+
+.App {
+    display: grid;
+    height: 100%;
+    width: 100%;
+}
+
+.h2 {
+    display: grid;
+    justify-self: center;
+    grid-column: 1 / 3;
+    margin: 10px;
+}
+
+.img_thumbnail {
+    width: 100%;
+    height: 200px;
+}
+
+.small_img_thumbnail {
+    width: 50px;
+    height: 50px;
+}
+
+.big_img_thumbnail {
+    width: 70%;
+}
+
+.big_img_div {
+    width: 80%;
+    position: fixed;
+    top: 100px;
+    left: 10%;
+}
+
+.add_cocktail {
+    display: grid;
+    justify-self: right;
+}
+
+.form_div {
+    display: grid;
+    grid-template-columns: auto;
+    width: 50%;
+    justify-self: center;
+}
+
+.form {
+    display: grid;
+    grid-row-gap: 10px;
+    grid-template-columns: auto;
+    padding: 10px;
+}
+
+.nav_bar {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 40%;
+}
+
+.nav_bar2 {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    padding-left: 100px;
+}
+
+.invalid-feedback,
+.alert {
+    color: red;
+}
+
+.main_register_div,
+.main_login_div,
+.main_div {
+    display: grid;
+}
+
+.main_nav {
+    display: grid;
+    grid-template-columns: 20% auto;
+
+}
