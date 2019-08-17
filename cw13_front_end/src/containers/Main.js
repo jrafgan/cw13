@@ -68,12 +68,13 @@ class Main extends Component {
                                 <CardContent className={classes.cardContent}>
                                     <Typography gutterBottom variant="h5" component="h2" className={classes.title}>
                                         <Link to={`/institution/${institution._id}`} className={classes.link}>
-                                        {institution.title}
+                                            {institution.title}
                                         </Link>
                                     </Typography>
                                 </CardContent>
-                                {ratings !== null ? <ReadOnlyRating data={ratings.filter(rating=>rating.institution._id === institution._id)}/> : null}
-                                <Button onClick={()=>this.props.deleteInstitution(institution._id)}>Delete</Button>
+                                {this.props.ratings && <ReadOnlyRating data={this.props.ratings.filter(rating => rating.institution._id === institution._id)} />}
+                                {this.props.user && this.props.user.role === "admin" &&
+                                <Button onClick={() => this.props.deleteInstitution(institution._id)}>Delete</Button>}
                             </Card>
                         </Grid>
                     ))}
@@ -86,6 +87,7 @@ class Main extends Component {
 const mapStateToProps = state => ({
     institutions: state.institutions.institutions,
     ratings: state.ratings.ratings,
+    user: state.users.user
 });
 
 const mapDispatchToProps = dispatch => ({

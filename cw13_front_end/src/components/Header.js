@@ -6,7 +6,6 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import FastFoodIcon from '@material-ui/icons/Fastfood';
 import {Link} from "react-router-dom";
-import ImageThumbnail from "./ImageThumbnail";
 import {apiURL} from "../constants";
 import CardMedia from "@material-ui/core/CardMedia";
 
@@ -51,7 +50,7 @@ export default function Header({user, logout}) {
                     </Typography>
 
                     {user ? <Fragment>
-                        <Typography>{`Hello, ${user.name} !`}</Typography>
+                        <Typography>{`Hello, ${user.name} ! `}</Typography>
                         <CardMedia
                             className={classes.media}
                             image={apiURL + '/uploads/' + user.image}

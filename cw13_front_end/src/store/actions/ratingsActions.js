@@ -22,16 +22,6 @@ export const getRatings = id => {
     }
 };
 
-export const getRating = id => {
-    console.log(id);
-    return dispatch => {
-        return axios.get('/ratings/' + id).then(
-            response => {
-                dispatch(fetchRatingSuccess(response.data));
-            });
-    };
-};
-
 export const addRating = ratingData => {
     return (dispatch, getState) => {
         console.log(ratingData);

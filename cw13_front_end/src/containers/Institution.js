@@ -3,7 +3,7 @@ import {getInstitution} from "../store/actions/institutionsActions";
 import connect from "react-redux/es/connect/connect";
 import Typography from "@material-ui/core/Typography";
 import {withStyles} from "@material-ui/styles";
-import {addRating, getRatings} from "../store/actions/ratingsActions";
+import {addRating, deleteRating, getRatings} from "../store/actions/ratingsActions";
 import Paper from '@material-ui/core/Paper';
 import ImageThumbnail from "../components/ImageThumbnail";
 import Divider from "@material-ui/core/Divider";
@@ -166,6 +166,7 @@ class Institution extends Component {
                             </Typography>
 
                             <UserRating rating={rating}/>
+                            {this.props.user && this.props.user.role === "admin" && <Button onClick={()=>this.props.deleteRating(rating._id)}>Delete</Button>}
                         </Paper>)}
                     </Fragment>}
 
@@ -222,7 +223,8 @@ const mapDispatchToProps = dispatch => ({
     getRatings: id => dispatch(getRatings(id)),
     addRating: ratingsData => dispatch(addRating(ratingsData)),
     addImage: (imageData) => dispatch(addImage(imageData)),
-    getImages: (id) => dispatch(getImages(id))
+    getImages: (id) => dispatch(getImages(id)),
+    deleteRating: id => dispatch(deleteRating(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Institution));
