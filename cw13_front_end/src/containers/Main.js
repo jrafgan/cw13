@@ -6,12 +6,13 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import {connect} from "react-redux";
 import {withStyles} from "@material-ui/styles";
-import {getInstitutions} from "../store/actions/institutionsActions";
+import {deleteInstitution, getInstitutions} from "../store/actions/institutionsActions";
 import ReadOnlyRating from "../components/ReadOnlyRating";
 import {getRatings} from "../store/actions/ratingsActions";
 import CardMedia from "@material-ui/core/CardMedia";
 import {apiURL} from "../constants";
 import {Link} from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
 const styles = () => ({
     cardGrid: {
@@ -72,6 +73,7 @@ class Main extends Component {
                                     </Typography>
                                 </CardContent>
                                 {ratings !== null ? <ReadOnlyRating data={ratings.filter(rating=>rating.institution._id === institution._id)}/> : null}
+                                <Button onClick={()=>this.props.deleteInstitution(institution._id)}>Delete</Button>
                             </Card>
                         </Grid>
                     ))}
@@ -89,6 +91,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     getInstitutions: () => dispatch(getInstitutions()),
     getRatings: () => dispatch(getRatings()),
+    deleteInstitution: id => dispatch(deleteInstitution(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Main));
