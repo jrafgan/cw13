@@ -5,7 +5,7 @@ import Box from '@material-ui/core/Box';
 import {arraySum} from "../constants";
 
 export default function ReadOnlyRating(props) {
-
+    console.log(props.data);
     const [value] = React.useState({
         food_quality: arraySum(props.data.map(rating=>rating.food_quality)),
         service_quality: arraySum(props.data.map(rating=>rating.service_quality)),

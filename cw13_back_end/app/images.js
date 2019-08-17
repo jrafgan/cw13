@@ -41,42 +41,16 @@ router.get('/', tryAuth, async (req, res) => {
         } else {
             return res.sendStatus(404);
         }
-        // else {
-        //
-        //     if (!req.user) {
-        //         images = await Image.find({published: true});
-        //     } else if (req.user.role === 'admin') {
-        //         images = await Image.find();
-        //     } else {
-        //         images = await Image.find({published: true});
-        //     }
-        //     if (images) return res.send(images);
-        //     else return res.sendStatus(500);
-        // }
+
     } catch (e) {
         return res.status(500).send(e);
     }
 });
 
-// router.get('/:id', (req, res) => {
-//
-//     const criteria = {recipe: req.params.id};
-//     Image.find(criteria).then(images => {
-//         if (images) res.send(images);
-//         else res.sendStatus(404);
-//     }).catch(() => res.sendStatus(500));
-// });
-
-
 router.post('/', [auth, upload.single('image')], async (req, res) => {
     try {
         let imageData = req.body;
-    // try {
-    //     imageData.ingredients = JSON.parse(req.body.ingredients);
-    // } catch (e) {
-    //     console.log('this is error : ', e);
-    //
-    // }
+
     if (req.file) {
         imageData.image = req.file.filename;
     }
@@ -94,23 +68,6 @@ router.post('/', [auth, upload.single('image')], async (req, res) => {
         return res.status(400).send(error)
     }
 });
-
-// router.post('/:id/add_image', auth, async (req, res) => {
-//     console.log(req.params.id);
-//     const institution = await Image.findById(req.params.id);
-//
-//     if (!institution) {
-//         return res.sendStatus(404);
-//     }
-//     if (req.file) {
-//         institution.image = institution.image.push(req.file.filename);
-//     }
-//
-//     await institution.save();
-//
-//     const images = await Image.find();
-//     return res.send("ok");
-// });
 
 router.delete('/', [auth, permit('admin')], async (req, res) => {
     try {

@@ -33,10 +33,19 @@ export const getRating = id => {
 };
 
 export const addRating = ratingData => {
-    return dispatch => {
+    return (dispatch, getState) => {
+        console.log(getState());
+        const ratingData = {
+            institution: ratingData.institution,
+            user: getState().user._id,
+            food_quality: ratingData.food_quality,
+            service_quality: ratingData.service_quality,
+            interior: ratingData.interior,
+            comment: ratingData.comment
+        }
         return axios.post('/ratings', ratingData).then(
             response => {
-                dispatch(getRating(ratingData.recipe));
+                dispatch(getRatings(ratingData.institution));
             },
             error => {
                 if (error.response) {

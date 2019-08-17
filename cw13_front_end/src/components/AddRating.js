@@ -13,7 +13,7 @@ const useStyles = makeStyles({
 
 export default function AddRating(props) {
 
-    const {changeHandler, easy_to_make, quick_to_make, taste} = props;
+    const {changeHandler, food_quality, service_quality, interior} = props;
     const classes = useStyles();
     return (
         <div>
@@ -21,39 +21,39 @@ export default function AddRating(props) {
 
                 <div className={classes.rating1}>
                     <Rating
-                        name="easy_to_make"
-                        value={easy_to_make}
+                        name="food_quality"
+                        value={food_quality}
                         precision={0.5}
                         onChange={(e, newValue) => {
                             changeHandler(e, newValue);
                         }}
                     />
-                    <Box ml={2}>{`Easy to make ${easy_to_make}`}</Box>
+                    <Box ml={2}>{`Easy to make ${food_quality}`}</Box>
                 </div>
 
                 <div className={classes.rating1}>
                     <Rating
-                        name="quick_to_make"
-                        value={quick_to_make}
+                        name="service_quality"
+                        value={service_quality}
                         precision={0.5}
                         onChange={(e, newValue) => {
                             changeHandler(e, newValue);
                         }}
 
                     />
-                    <Box ml={2}>{`Quick to make ${quick_to_make}`}</Box>
+                    <Box ml={2}>{`Quick to make ${service_quality}`}</Box>
                 </div>
 
                 <div className={classes.rating1}>
                     <Rating
-                        name="taste"
-                        value={taste}
+                        name="interior"
+                        value={interior}
                         precision={0.5}
                         onChange={(e, newValue) => {
                             changeHandler(e, newValue);
                         }}
                     />
-                    <Box ml={2}>{`Taste ${taste}`}</Box>
+                    <Box ml={2}>{`Taste ${interior}`}</Box>
                 </div>
 
             </Box>

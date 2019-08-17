@@ -180,12 +180,12 @@ const run = async () => {
             image: "cozze.jpg"
         },
         {
-            institution: institution4._id,
+            institution: institution5._id,
             user: user3._id,
             image: "photo0jpg (1).jpg"
         },
         {
-            institution: institution4._id,
+            institution: institution6._id,
             user: user3._id,
             image: "polentoni.jpg"
         }

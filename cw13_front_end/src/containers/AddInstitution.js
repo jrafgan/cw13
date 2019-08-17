@@ -6,7 +6,10 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
-import {makeStyles} from "@material-ui/core";
+import {withStyles} from "@material-ui/styles";
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const styles = () => ({
     container: {
@@ -19,6 +22,12 @@ const styles = () => ({
         width: 300,
         display: "flex",
         lexWrap: "wrap"
+    },
+    textArea: {
+        marginLeft: 8,
+        marginRight: 8,
+        marginTop: 10,
+        width: 300
     },
     dense: {
         marginTop: 19,
@@ -42,27 +51,29 @@ class AddInstitution extends Component {
     state = {
         title: "",
         description: "",
-        user: "this.props.user._id",
+        user: this.props.user._id,
         image: null,
-    };
-
-    handleChange = () => {
-      console.log("HandleChange")
+        checked: false
     };
 
     submitFormHandler = e => {
         e.preventDefault();
-        if (this.state.image) {
-            let formData = new FormData();
-            Object.keys(this.state).forEach(key => {
-                if (this.state[key] !== null) {
-                    formData.append(key, this.state[key]);
-                }
-            });
-            this.props.addRecipe(formData);
-        } else {
-            this.props.addRecipe(this.state)
-        }
+        console.log(this.state);
+        // if (this.state.image) {
+        //     let formData = new FormData();
+        //     Object.keys(this.state).forEach(key => {
+        //         if (this.state[key] !== null) {
+        //             formData.append(key, this.state[key]);
+        //         }
+        //     });
+        //     this.props.addInstitution(formData);
+        // } else {
+        //     this.props.addInstitution(this.state)
+        // }
+    };
+
+    handleChange = e => {
+        this.setState({checked: !this.state.checked})
     };
 
     inputChangeHandler = e => {
@@ -83,50 +94,46 @@ class AddInstitution extends Component {
             <Card className={classes.card}>
                 <CardContent className={classes.content}>
                     <Typography variant="h4" color="inherit" className={classes.typography_h4}>
-                        Add recipe
+                        Add institution
                     </Typography>
                     <form className={classes.container} autoComplete onSubmit={this.submitFormHandler}>
                         <TextField
                             required
-                            id="username"
-                            name="username"
-                            label="Username"
-                            defaultValue=""
+                            id="title"
+                            name="title"
+                            label="Title"
+                            value={this.state.title}
                             className={classes.textField}
-                            onChange={this.handleChange}
+                            onChange={this.inputChangeHandler}
                             margin="dense"
                             autoFocus
                         />
 
-                        <TextField
+                        <TextareaAutosize
                             required
-                            id="name"
-                            name="name"
-                            label="Name"
-                            defaultValue=""
-                            className={classes.textField}
-                            onChange={this.handleChange}
-                            margin="dense"
-                        />
+                            className={classes.textArea}
+                            name="description"
+                            aria-label="description"
+                            rows={3}
+                            placeholder="Description"
+                            value={this.state.description}
+                            onChange={this.inputChangeHandler}/>
 
                         <TextField
                             required
-                            id="password"
-                            name="password"
-                            label="Password"
-                            defaultValue=""
-                            className={classes.textField}
-                            onChange={this.handleChange}
-                            margin="dense"
-                        />
-
-                        <TextField
                             id="image"
                             name="image"
                             type="file"
                             className={classes.textField}
                             onChange={this.fileChangeHandler}
                             margin="dense"
+                        />
+
+                        <FormControlLabel
+                            control={
+                                <Checkbox checked={this.state.checked} onChange={this.handleChange} value={this.state.checked} required/>
+                            }
+                            label="I agree"
                         />
 
                         <Button
@@ -147,11 +154,12 @@ class AddInstitution extends Component {
 }
 
 const mapStateToProps = state => ({
-    institutions: state.recipes.recipes
+    institutions: state.institutions.institutions,
+    user: state.users.user,
 });
 
 const mapDispatchToProps = dispatch => ({
-    addRecipe: (recipeData) => dispatch(addInstitution(recipeData)),
+    addInstitution: (institutionData) => dispatch(addInstitution(institutionData)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddInstitution);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(AddInstitution));

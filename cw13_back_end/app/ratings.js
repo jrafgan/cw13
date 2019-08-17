@@ -39,15 +39,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', auth, (req, res) => {
     let ratingData = req.body;
-    // try {
-    //     ratingData.ingredients = JSON.parse(req.body.ingredients);
-    // } catch (e) {
-    //     console.log('this is error : ', e);
-    //
-    // }
-    // if (req.file) {
-    //     ratingData.image = req.file.filename;
-    // }
+
     ratingData.user = req.user._id;
 
     const rating = new Rating(ratingData);
@@ -55,18 +47,6 @@ router.post('/', auth, (req, res) => {
         .then(() => res.send({message: 'Ok'}))
         .catch(error => res.status(400).send(error));
 });
-
-// router.post('/:id/toggle_published', [auth, permit('admin')], async (req, res) => {
-//     const rating = await Rating.findById(req.params.id);
-//     if (!rating) {
-//         return res.sendStatus(404);
-//     }
-//     // rating.published = !rating.published;
-//     // await rating.save();
-//
-//     const ratings = await Rating.find();
-//     return res.send(ratings);
-// });
 
 router.delete('/', [auth, permit('admin')], async (req, res) => {
     try {

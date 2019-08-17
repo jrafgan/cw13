@@ -32,9 +32,9 @@ export const getInstitution = id => {
     };
 };
 
-export const addInstitution = recipeData => {
+export const addInstitution = institutionData => {
     return dispatch => {
-        return axios.post('/institutions', recipeData).then(
+        return axios.post('/institutions', institutionData).then(
             response => {
                 dispatch(push('/'));
             },

@@ -66,7 +66,6 @@ class Institution extends Component {
 
     state = {
         institution: this.props.match.params.id,
-        user: this.props.user._id,
         food_quality: 0,
         service_quality: 0,
         interior: 0,
@@ -81,7 +80,6 @@ class Institution extends Component {
 
     componentDidUpdate(prevProps) {
         return prevProps.ratings !== this.props.ratings;
-
     }
 
     handleChange = e => {
@@ -92,11 +90,11 @@ class Institution extends Component {
 
     changeHandler = (e, newValue) => {
         switch (e.target.name) {
-            case "easy_to_make":
+            case "food_quality":
                 return this.setState({food_quality: newValue});
-            case "quick_to_make":
+            case "service_quality":
                 return this.setState({service_quality: newValue});
-            case "taste":
+            case "interior":
                 return this.setState({interior: newValue});
 
             default:
@@ -134,7 +132,7 @@ class Institution extends Component {
                     </Typography>
 
                     <div className={classes.gridRoot}>
-                        {images && <GridList className={classes.gridList} cols={1}>
+                        {images && <GridList className={classes.gridList} cols={2}>
                             {images.map(image=><GridListTile key={image._id} >
                                 <img src={apiURL + '/uploads/' + image.image} alt={image.image}/>
                                 <GridListTileBar
@@ -171,42 +169,39 @@ class Institution extends Component {
                         </Paper>)}
                     </Fragment>}
 
-                    {this.props.user &&
-                        <AddImage institutionId={institution._id} addImage={this.props.addImage}/>
-                    }
-                        {this.props.user && (
+                    {this.props.user && (institution && institution.user === this.props.user._id ?
+                        <AddImage institutionId={institution._id} addImage={this.props.addImage}/> :
                         <Paper className={classes.root}>
-                            <Typography variant="h4" component="h3">
-                                Comment and rate
-                            </Typography>
+                        <Typography variant="h4" component="h3">
+                        Comment and rate
+                        </Typography>
 
-                            <form className={classes.container} onSubmit={this.formSubmit} autoComplete="on">
-                                <TextareaAutosize
-                                    className={classes.textArea}
-                                    name="comment"
-                                    aria-label="minimum height"
-                                    rows={3}
-                                    placeholder="Your comment here"
-                                    value={this.state.comment}
-                                    onChange={this.handleChange}/>
+                        <form className={classes.container} onSubmit={this.formSubmit} autoComplete="on">
+                        <TextareaAutosize
+                        className={classes.textArea}
+                        name="comment"
+                        aria-label="minimum height"
+                        rows={3}
+                        placeholder="Your comment here"
+                        value={this.state.comment}
+                        onChange={this.handleChange}/>
 
-                                <AddRating
-                                    changeHandler={this.changeHandler}
-                                    easy_to_make={this.state.food_quality}
-                                    quick_to_make={this.state.service_quality}
-                                    taste={this.state.interior}/>
+                        <AddRating
+                        changeHandler={this.changeHandler}
+                        food_quality={this.state.food_quality}
+                        service_quality={this.state.service_quality}
+                        interior={this.state.interior}/>
 
-                                <Button
-                                    type="submit"
-                                    variant="contained"
-                                    color="primary"
-                                    size="small"
-                                    style={{marginTop: "45px", float: "right", height: "28px"}}>
-                                    Add
-                                </Button>
-                            </form>
-                        </Paper>
-                    )}
+                        <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        size="small"
+                        style={{marginTop: "45px", float: "right", height: "28px"}}>
+                        Add
+                        </Button>
+                        </form>
+                        </Paper>)}
 
                     <Divider variant="middle"/>
                 </Fragment>}

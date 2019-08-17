@@ -71,7 +71,7 @@ class Main extends Component {
                                         </Link>
                                     </Typography>
                                 </CardContent>
-                                {ratings && <ReadOnlyRating data={ratings.filter(rating=>rating.institution._id === institution._id)}/>}
+                                {ratings !== null ? <ReadOnlyRating data={ratings.filter(rating=>rating.institution._id === institution._id)}/> : null}
                             </Card>
                         </Grid>
                     ))}

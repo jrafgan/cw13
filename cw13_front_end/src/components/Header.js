@@ -3,10 +3,12 @@ import {makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import FastFoodIcon from '@material-ui/icons/Fastfood';
 import {Link} from "react-router-dom";
+import ImageThumbnail from "./ImageThumbnail";
+import {apiURL} from "../constants";
+import CardMedia from "@material-ui/core/CardMedia";
 
 
 const useStyles = makeStyles(theme => ({
@@ -22,7 +24,12 @@ const useStyles = makeStyles(theme => ({
     link: {
         color: "#fff",
         marginRight: 15,
+        marginLeft: 15,
         textDecoration: "none"
+    },
+    media: {
+        height: 50,
+        width: 50
     }
 }));
 
@@ -36,14 +43,22 @@ export default function Header({user, logout}) {
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                         <FastFoodIcon/>
                     </IconButton>
-                    <Link className={classes.link} to="/">
-                        <Typography variant="h6" className={classes.title}>
+
+                    <Typography variant="h6" className={classes.title}>
+                        <Link className={classes.link} to="/">
                             Institutions
-                        </Typography>
-                    </Link>
+                        </Link>
+                    </Typography>
+
                     {user ? <Fragment>
+                        <Typography>{`Hello, ${user.name} !`}</Typography>
+                        <CardMedia
+                            className={classes.media}
+                            image={apiURL + '/uploads/' + user.image}
+                            title="institution"
+                        />
                         <Link className={classes.link} to="/" onClick={logout}>Logout</Link>
-                        <Link className={classes.link} to="/add_institution">AddInstitution</Link>
+                        <Link className={classes.link} to="/add_institution">Add institution</Link>
                     </Fragment> : <Fragment>
                         <Link className={classes.link} to="/login">Login</Link>
                         <Link className={classes.link} to="/register">Register</Link>
