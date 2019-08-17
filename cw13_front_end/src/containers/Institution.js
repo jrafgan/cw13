@@ -66,7 +66,7 @@ class Institution extends Component {
 
     state = {
         institution: this.props.match.params.id,
-        user: null,
+        user: this.props.user._id,
         food_quality: 0,
         service_quality: 0,
         interior: 0,
@@ -80,9 +80,8 @@ class Institution extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.ratings !== this.props.ratings || prevProps.user !== this.props.user) {
-            if(this.props.user) this.setState({user: this.props.user._id});
-        }
+        return prevProps.ratings !== this.props.ratings;
+
     }
 
     handleChange = e => {

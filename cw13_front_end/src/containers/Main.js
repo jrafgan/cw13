@@ -28,6 +28,8 @@ const styles = () => ({
     },
     link: {
         margin: 8,
+        marginRight: 15,
+        textDecoration: "none"
     },
     title: {
         height: 100
