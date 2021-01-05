@@ -7,7 +7,7 @@
     "@material-ui/icons": "^4.2.1",
     "@material-ui/lab": "^4.0.0-alpha.23",
     "@material-ui/styles": "^4.3.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "connected-react-router": "^6.4.0",
     "history": "latest",
     "moment": "^2.24.0",
