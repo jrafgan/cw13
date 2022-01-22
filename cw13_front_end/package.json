@@ -11,7 +11,7 @@
     "connected-react-router": "^6.4.0",
     "history": "latest",
     "moment": "^2.24.0",
-    "nanoid": "^2.0.2",
+    "nanoid": "^3.1.31",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
